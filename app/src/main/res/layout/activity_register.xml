@@ -152,6 +152,7 @@
                     android:text="Password"
                     android:textSize="17sp" />
 
+
                 <EditText
                     android:id="@+id/passwordEt"
                     android:layout_width="match_parent"
@@ -160,12 +161,16 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="20dp"
+                    android:drawableRight="@drawable/ic_baseline_visibility_off_24"
+                    android:drawableTint="@color/brown"
                     android:background="@drawable/edittext_bg"
                     android:backgroundTint="@color/white"
                     android:hint="Enter Password"
+                    android:longClickable="false"
                     android:inputType="textPassword"
                     android:padding="10dp"
                     android:textSize="14sp" />
+
 
                 <TextView
                     android:id="@+id/registerBtn"

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "723256521949",
+    "project_id": "cofeeorderapp-f30bc",
+    "storage_bucket": "cofeeorderapp-f30bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:723256521949:android:c1e2312b78a9d7fd249734",
+        "android_client_info": {
+          "package_name": "com.rrmchathura.cofee_order_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "723256521949-aoi5atk9bkqcr0etgoa5s564m5kfvrid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaRJpCWRupYMc6P8lSyt2T5Q-lh5V_zN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "723256521949-aoi5atk9bkqcr0etgoa5s564m5kfvrid.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
