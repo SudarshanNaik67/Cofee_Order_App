@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cofee_Order_App">
         <activity
+            android:name=".Coffee_Details_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Admin.Admin_Home_Activity"
             android:exported="false" />
         <activity

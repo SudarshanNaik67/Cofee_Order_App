@@ -51,7 +51,6 @@ public class Admin_Add_Menu_Fragment extends Fragment {
 
     FirebaseAuth mAuth;
     FirebaseDatabase database;
-    DatabaseReference databaseReference;
     FirebaseStorage storageReference;
 
     private String coffeeName = "", coffeeQuantity = "", coffeePrice = "";

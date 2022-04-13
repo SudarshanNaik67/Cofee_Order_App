@@ -2,18 +2,22 @@ package com.rrmchathura.cofee_order_app.Model;
 
 public class CoffeeModel {
 
-    String coffeeId;
-    String coffeeName;
-    int quantity,price;
+    String coffeeId,coffee_image,coffee_name,price,quantity,timestamp;
+    boolean isAdditionCusAvailable,isSizeCusAvailable,isSugarCusAvailable;
 
     public CoffeeModel() {
     }
 
-    public CoffeeModel(String coffeeId, String coffeeName, int quantity, int price) {
+    public CoffeeModel(String coffeeId, String coffee_image, String coffee_name, String price, String quantity, String timestamp, boolean isAdditionCusAvailable, boolean isSizeCusAvailable, boolean isSugarCusAvailable) {
         this.coffeeId = coffeeId;
-        this.coffeeName = coffeeName;
-        this.quantity = quantity;
+        this.coffee_image = coffee_image;
+        this.coffee_name = coffee_name;
         this.price = price;
+        this.quantity = quantity;
+        this.timestamp = timestamp;
+        this.isAdditionCusAvailable = isAdditionCusAvailable;
+        this.isSizeCusAvailable = isSizeCusAvailable;
+        this.isSugarCusAvailable = isSugarCusAvailable;
     }
 
     public String getCoffeeId() {
@@ -24,27 +28,67 @@ public class CoffeeModel {
         this.coffeeId = coffeeId;
     }
 
-    public String getCoffeeName() {
-        return coffeeName;
+    public String getCoffee_image() {
+        return coffee_image;
     }
 
-    public void setCoffeeName(String coffeeName) {
-        this.coffeeName = coffeeName;
+    public void setCoffee_image(String coffee_image) {
+        this.coffee_image = coffee_image;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getCoffee_name() {
+        return coffee_name;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setCoffee_name(String coffee_name) {
+        this.coffee_name = coffee_name;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public boolean isAdditionCusAvailable() {
+        return isAdditionCusAvailable;
+    }
+
+    public void setAdditionCusAvailable(boolean additionCusAvailable) {
+        isAdditionCusAvailable = additionCusAvailable;
+    }
+
+    public boolean isSizeCusAvailable() {
+        return isSizeCusAvailable;
+    }
+
+    public void setSizeCusAvailable(boolean sizeCusAvailable) {
+        isSizeCusAvailable = sizeCusAvailable;
+    }
+
+    public boolean isSugarCusAvailable() {
+        return isSugarCusAvailable;
+    }
+
+    public void setSugarCusAvailable(boolean sugarCusAvailable) {
+        isSugarCusAvailable = sugarCusAvailable;
     }
 }
