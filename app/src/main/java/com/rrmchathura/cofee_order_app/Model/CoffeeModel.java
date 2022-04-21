@@ -3,21 +3,20 @@ package com.rrmchathura.cofee_order_app.Model;
 public class CoffeeModel {
 
     String coffeeId,coffee_image,coffee_name,price,quantity,timestamp;
-    boolean isAdditionCusAvailable,isSizeCusAvailable,isSugarCusAvailable;
+    String isCustomizeCusAvailable;
+
 
     public CoffeeModel() {
     }
 
-    public CoffeeModel(String coffeeId, String coffee_image, String coffee_name, String price, String quantity, String timestamp, boolean isAdditionCusAvailable, boolean isSizeCusAvailable, boolean isSugarCusAvailable) {
+    public CoffeeModel(String coffeeId, String coffee_image, String coffee_name, String price, String quantity, String timestamp, String isCustomizeCusAvailable) {
         this.coffeeId = coffeeId;
         this.coffee_image = coffee_image;
         this.coffee_name = coffee_name;
         this.price = price;
         this.quantity = quantity;
         this.timestamp = timestamp;
-        this.isAdditionCusAvailable = isAdditionCusAvailable;
-        this.isSizeCusAvailable = isSizeCusAvailable;
-        this.isSugarCusAvailable = isSugarCusAvailable;
+        this.isCustomizeCusAvailable = isCustomizeCusAvailable;
     }
 
     public String getCoffeeId() {
@@ -68,27 +67,11 @@ public class CoffeeModel {
         this.timestamp = timestamp;
     }
 
-    public boolean isAdditionCusAvailable() {
-        return isAdditionCusAvailable;
+    public String getIsCustomizeCusAvailable() {
+        return isCustomizeCusAvailable;
     }
 
-    public void setAdditionCusAvailable(boolean additionCusAvailable) {
-        isAdditionCusAvailable = additionCusAvailable;
-    }
-
-    public boolean isSizeCusAvailable() {
-        return isSizeCusAvailable;
-    }
-
-    public void setSizeCusAvailable(boolean sizeCusAvailable) {
-        isSizeCusAvailable = sizeCusAvailable;
-    }
-
-    public boolean isSugarCusAvailable() {
-        return isSugarCusAvailable;
-    }
-
-    public void setSugarCusAvailable(boolean sugarCusAvailable) {
-        isSugarCusAvailable = sugarCusAvailable;
+    public void setIsCustomizeCusAvailable(String isCustomizeCusAvailable) {
+        this.isCustomizeCusAvailable = isCustomizeCusAvailable;
     }
 }

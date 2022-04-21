@@ -261,6 +261,7 @@
                             android:elevation="4dp" />
 
                         <RadioButton
+                            android:id="@+id/smallSugarRB"
                             android:layout_width="15dp"
                             android:layout_height="15dp"
                             android:layout_gravity="center"
@@ -271,6 +272,7 @@
                             android:elevation="4dp" />
 
                         <RadioButton
+                            android:id="@+id/mediumSugarRB"
                             android:layout_width="39dp"
                             android:layout_height="15dp"
                             android:layout_gravity="center"
@@ -281,6 +283,7 @@
                             android:elevation="4dp" />
 
                         <RadioButton
+                            android:id="@+id/highSugarRB"
                             android:layout_width="39dp"
                             android:layout_height="39dp"
                             android:layout_gravity="center"
@@ -317,8 +320,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:textColor="@color/sub_brown"
                     android:text="Additions"
+                    android:textColor="@color/sub_brown"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -338,6 +341,7 @@
 
 
                         <RadioButton
+                            android:id="@+id/additionCreamRB"
                             android:layout_width="25dp"
                             android:layout_height="21dp"
                             android:layout_gravity="center"
@@ -346,6 +350,7 @@
                             android:elevation="4dp" />
 
                         <RadioButton
+                            android:id="@+id/additionalStickerRB"
                             android:layout_width="28dp"
                             android:layout_height="25dp"
                             android:layout_gravity="center"
@@ -406,24 +411,23 @@
 
             </RelativeLayout>
 
-<!--            <TextView-->
-<!--                android:id="@+id/addToCartBtn"-->
-<!--                android:layout_width="198dp"-->
-<!--                android:layout_height="55dp"-->
-<!--                android:layout_below="@id/totalRl"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:layout_marginHorizontal="30dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:layout_marginBottom="30dp"-->
-<!--                android:background="@drawable/cart_btn"-->
-<!--                android:elevation="20dp"-->
-<!--                android:fontFamily="@font/rubik_medium"-->
-<!--                android:gravity="center"-->
-<!--                android:text="Add to cart"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="18sp" />-->
-
+            <!--            <TextView-->
+            <!--                android:id="@+id/addToCartBtn"-->
+            <!--                android:layout_width="198dp"-->
+            <!--                android:layout_height="55dp"-->
+            <!--                android:layout_below="@id/totalRl"-->
+            <!--                android:layout_centerInParent="true"-->
+            <!--                android:layout_marginHorizontal="30dp"-->
+            <!--                android:layout_marginTop="30dp"-->
+            <!--                android:layout_marginBottom="30dp"-->
+            <!--                android:background="@drawable/cart_btn"-->
+            <!--                android:elevation="20dp"-->
+            <!--                android:fontFamily="@font/rubik_medium"-->
+            <!--                android:gravity="center"-->
+            <!--                android:text="Add to cart"-->
+            <!--                android:textAlignment="center"-->
+            <!--                android:textColor="@color/white"-->
+            <!--                android:textSize="18sp" />-->
 
 
         </RelativeLayout>

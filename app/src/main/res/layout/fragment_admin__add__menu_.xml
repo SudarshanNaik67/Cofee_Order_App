@@ -152,38 +152,18 @@
                         android:textSize="15sp" />
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/sizeSwitch"
+                        android:id="@+id/customizeSwitch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
                         android:paddingStart="15dp"
                         android:paddingEnd="15dp"
-                        android:text="Size customize available"
+                        android:text="Customize available"
                         android:textColor="@color/brown"
                         android:textSize="15sp" />
 
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/sugarSwitch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="Sugar customize available"
-                        android:textColor="@color/brown"
-                        android:textSize="15sp" />
 
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/additionsSwitch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:paddingStart="15dp"
-                        android:paddingEnd="15dp"
-                        android:text="Additions customize available"
-                        android:textColor="@color/brown"
-                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/addCoffeeBtn"

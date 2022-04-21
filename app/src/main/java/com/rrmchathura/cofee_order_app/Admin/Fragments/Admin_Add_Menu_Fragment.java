@@ -54,7 +54,7 @@ public class Admin_Add_Menu_Fragment extends Fragment {
     FirebaseStorage storageReference;
 
     private String coffeeName = "", coffeeQuantity = "", coffeePrice = "";
-    boolean isSizeCusAvailable = false, isSugarCusAvailable = false, isAdditionCusAvailable = false;
+    boolean isCustomizeAvailable = false;
 
     private static final int CAMERA_REQUEST_CODE = 200;
     private static final int STORAGE_REQUEST_CODE = 300;
@@ -90,35 +90,13 @@ public class Admin_Add_Menu_Fragment extends Fragment {
             }
         });
 
-        binding.sizeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        binding.customizeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    isSizeCusAvailable = true;
+                    isCustomizeAvailable = true;
                 } else {
-                    isSizeCusAvailable = false;
-                }
-            }
-        });
-
-        binding.sugarSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    isSugarCusAvailable = true;
-                } else {
-                    isSugarCusAvailable = false;
-                }
-            }
-        });
-
-        binding.additionsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    isAdditionCusAvailable = true;
-                } else {
-                    isAdditionCusAvailable = false;
+                    isCustomizeAvailable = false;
                 }
             }
         });
@@ -189,9 +167,7 @@ public class Admin_Add_Menu_Fragment extends Fragment {
                     hashMap.put("quantity",""+coffeeQuantity+"ml");
                     hashMap.put("price",""+coffeePrice);
                     hashMap.put("coffee_image",downloadImageUri.toString());
-                    hashMap.put("isSizeCusAvailable",isSizeCusAvailable);
-                    hashMap.put("isSugarCusAvailable",isSugarCusAvailable);
-                    hashMap.put("isAdditionCusAvailable",isAdditionCusAvailable);
+                    hashMap.put("isCustomizeCusAvailable",""+isCustomizeAvailable);
                     hashMap.put("timestamp",""+time);
 
                     databaseReference.child(timestamp).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -225,9 +201,7 @@ public class Admin_Add_Menu_Fragment extends Fragment {
         binding.coffeeName.setText("");
         binding.coffeeQuantity.setText("");
         binding.coffeePrice.setText("");
-        binding.sizeSwitch.setChecked(false);
-        binding.sugarSwitch.setChecked(false);
-        binding.additionsSwitch.setChecked(false);
+        binding.customizeSwitch.setChecked(false);
     }
 
     private void showImagePickerDialog() {

@@ -2,6 +2,7 @@ package com.rrmchathura.cofee_order_app.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class CoffeeAdapter extends RecyclerView.Adapter<CoffeeAdapter.CoffeeView
         String coffeeName = coffeeModel.getCoffee_name();
         String coffeeImage = coffeeModel.getCoffee_image();
         String coffeePrice = coffeeModel.getPrice();
+        String isCustomizeAvailable = coffeeModel.getIsCustomizeCusAvailable();
 
         holder.coffeeName.setText(coffeeName);
 
@@ -56,6 +58,18 @@ public class CoffeeAdapter extends RecyclerView.Adapter<CoffeeAdapter.CoffeeView
             holder.CoffeeImage.setImageResource(R.drawable.spinner);
         }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Coffee_Details_Activity.class);
+                intent.putExtra("coffeeName",coffeeName);
+                intent.putExtra("coffeePrice",coffeePrice);
+                intent.putExtra("coffeeImage",coffeeImage);
+                intent.putExtra("isCustomizeAvailable",isCustomizeAvailable);
+                context.startActivity(intent);
+            }
+        });
+
         holder.more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,6 +77,7 @@ public class CoffeeAdapter extends RecyclerView.Adapter<CoffeeAdapter.CoffeeView
                 intent.putExtra("coffeeName",coffeeName);
                 intent.putExtra("coffeePrice",coffeePrice);
                 intent.putExtra("coffeeImage",coffeeImage);
+                intent.putExtra("isCustomizeAvailable",isCustomizeAvailable);
                 context.startActivity(intent);
             }
         });
