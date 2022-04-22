@@ -10,6 +10,7 @@ import android.view.View;
 import com.google.android.material.navigation.NavigationBarView;
 import com.rrmchathura.cofee_order_app.Admin.Fragments.Admin_Add_Menu_Fragment;
 import com.rrmchathura.cofee_order_app.Admin.Fragments.Admin_Home_Fragment;
+import com.rrmchathura.cofee_order_app.Admin.Fragments.Admin_Settings_Fragment;
 import com.rrmchathura.cofee_order_app.R;
 import com.rrmchathura.cofee_order_app.databinding.ActivityAdminHomeBinding;
 
@@ -19,6 +20,7 @@ public class Admin_Home_Activity extends AppCompatActivity {
 
     Admin_Home_Fragment admin_home_fragment = new Admin_Home_Fragment();
     Admin_Add_Menu_Fragment admin_add_menu_fragment = new Admin_Add_Menu_Fragment();
+    Admin_Settings_Fragment admin_settings_fragment = new Admin_Settings_Fragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,9 @@ public class Admin_Home_Activity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,admin_home_fragment).commit();
                         return true;
 
+                    case R.id.settings:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,admin_settings_fragment).commit();
+                        return true;
                 }
                 return false;
             }

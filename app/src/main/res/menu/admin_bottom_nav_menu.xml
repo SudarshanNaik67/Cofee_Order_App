@@ -9,9 +9,9 @@
     <item android:id="@+id/placeholder"
         android:title=""/>
 
-    <item android:id="@+id/person"
-        android:icon="@drawable/profile"
-        android:title="Person"/>
+    <item android:id="@+id/settings"
+        android:icon="@drawable/settings"
+        android:title="Settings"/>
 
 
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
-    tools:context=".Admin.Fragments.Admin_Home_Fragment">
+    tools:context=".Admin.Fragments.Admin_Settings_Fragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,7 +21,7 @@
             android:id="@+id/visibleLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="60dp"
+            android:layout_marginEnd="50dp"
             android:visibility="gone">
 
             <EditText
@@ -29,10 +29,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:background="@drawable/search_bg_new"
                 android:hint="Search...."
                 android:padding="10dp"
-                android:background="@drawable/search_bg_new"
-                android:backgroundTint="@color/background"
                 android:singleLine="true"
                 android:textColor="@color/brown"
                 android:textColorHint="@color/brown" />
@@ -53,72 +52,73 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_below="@id/toolbar"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar">
-
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/linear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/image"
-                    android:text="It's Great"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="30sp" />
-
-                <TextView
-                    android:id="@+id/text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/image"
-                    android:layout_marginStart="7dp"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Day for"
-                    android:textAlignment="center"
-                    android:textColor="@color/brown"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image"
+                android:text="It's Time"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image"
+                android:layout_marginStart="7dp"
+                android:text="for"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image"
+                android:layout_marginStart="7dp"
+                android:text="Update"
                 android:fontFamily="sans-serif-black"
-                android:text="Coffee."
+                android:textAlignment="center"
                 android:textColor="@color/brown"
                 android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
         </LinearLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleView"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/linear"
-            android:layout_marginTop="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/raw_menu_item" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image"
+            android:fontFamily="sans-serif-black"
+            android:text="Coffee."
+            android:textColor="@color/brown"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_below="@id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/raw_menu_item_edit" />
 
 </RelativeLayout>

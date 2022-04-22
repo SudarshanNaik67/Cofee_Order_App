@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rrmchathura.cofee_order_app.Coffee_Details_Activity;
+import com.rrmchathura.cofee_order_app.Filters.CoffeeFilter;
 import com.rrmchathura.cofee_order_app.Model.CoffeeModel;
 import com.rrmchathura.cofee_order_app.R;
 import com.squareup.picasso.Picasso;
@@ -22,14 +25,16 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
-public class CoffeeAdapter extends RecyclerView.Adapter<CoffeeAdapter.CoffeeViewHolder> {
+public class CoffeeAdapter extends RecyclerView.Adapter<CoffeeAdapter.CoffeeViewHolder> implements Filterable {
 
     Context context;
-    ArrayList<CoffeeModel> coffeeList;
+    public ArrayList<CoffeeModel> coffeeList,filterList;
+    public CoffeeFilter filter;
 
     public CoffeeAdapter(Context context, ArrayList<CoffeeModel> coffeeList) {
         this.context = context;
         this.coffeeList = coffeeList;
+        this.filterList = coffeeList;
     }
 
     @NonNull
@@ -86,6 +91,14 @@ public class CoffeeAdapter extends RecyclerView.Adapter<CoffeeAdapter.CoffeeView
     @Override
     public int getItemCount() {
         return coffeeList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new CoffeeFilter(this, filterList);
+        }
+        return filter;
     }
 
     public class CoffeeViewHolder extends RecyclerView.ViewHolder {
