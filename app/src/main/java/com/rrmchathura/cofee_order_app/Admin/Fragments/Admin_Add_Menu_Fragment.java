@@ -38,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
 import com.rrmchathura.cofee_order_app.R;
+import com.rrmchathura.cofee_order_app.Splash_Activity;
 import com.rrmchathura.cofee_order_app.databinding.FragmentAdminAddMenuBinding;
 
 import java.text.SimpleDateFormat;
@@ -83,6 +84,13 @@ public class Admin_Add_Menu_Fragment extends Fragment {
         progressDialog.setTitle("Please Wait...");
         progressDialog.setCanceledOnTouchOutside(false);
 
+        binding.logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoadLogoutDialog();
+            }
+        });
+
         binding.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,6 +118,27 @@ public class Admin_Add_Menu_Fragment extends Fragment {
 
         return binding.getRoot();
 
+    }
+
+    private void LoadLogoutDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("LogOut");
+        builder.setMessage("Do you want to logout?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mAuth.signOut();
+                startActivity(new Intent(getContext(), Splash_Activity.class));
+                getActivity().finish();
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
     }
 
     private void ValidateData() {

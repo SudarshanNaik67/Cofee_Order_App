@@ -97,6 +97,8 @@ public class Admin_Home_Fragment extends Fragment {
         LoadAllCoffee();
     }
 
+
+
     private void LoadAllCoffee() {
 
         coffeeList = new ArrayList<>();
@@ -125,4 +127,5 @@ public class Admin_Home_Fragment extends Fragment {
             }
         });
     }
+
 }

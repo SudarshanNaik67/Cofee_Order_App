@@ -7,10 +7,37 @@
     android:background="@color/background"
     tools:context=".Admin.Fragments.Admin_Add_Menu_Fragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/background"
+        android:backgroundTint="@color/brown"
+        app:title=""
+        app:titleTextColor="@color/white">
+
+
+        <ImageButton
+            android:id="@+id/logOutBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/power_off" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
     <RelativeLayout
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="210dp"
+        android:layout_below="@id/toolbar"
         android:background="@drawable/add_bg">
 
 
