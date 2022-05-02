@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,11 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +42,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.UploadTask;
+import com.hbb20.CountryCodePicker;
+import com.rrmchathura.cofee_order_app.OTPActivity;
 import com.rrmchathura.cofee_order_app.R;
 import com.rrmchathura.cofee_order_app.Splash_Activity;
 import com.rrmchathura.cofee_order_app.databinding.FragmentProfileBinding;
@@ -44,6 +51,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class ProfileFragment extends Fragment {
 
@@ -66,6 +74,9 @@ public class ProfileFragment extends Fragment {
     private static final int IMAGE_PICK_CAMERA_CODE = 400;
 
     private Uri image_uri;
+    private  String countryCode,phoneNumber,codeSent;
+
+    PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,6 +90,8 @@ public class ProfileFragment extends Fragment {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setTitle("Please Wait");
         progressDialog.setCanceledOnTouchOutside(false);
+
+        countryCode = binding.countrycodepicker.getSelectedCountryCodeWithPlus();
 
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -106,6 +119,73 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        binding.verifyMobile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String number;
+                number = binding.mobileEt.getText().toString();
+                if (number.isEmpty())
+                {
+                    Toast.makeText(getContext(),"Please Enter Your Number",Toast.LENGTH_SHORT).show();
+                }
+                else if (number.length()<10)
+                {
+                    Toast.makeText(getContext(),"Please Enter Correct Number",Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    progressDialog.setMessage("Sending OTP.....");
+                    progressDialog.show();
+
+                    phoneNumber = countryCode+number;
+
+                    PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth).setPhoneNumber(phoneNumber)
+                            .setTimeout(60L, TimeUnit.SECONDS)
+                            .setActivity(getActivity())
+                            .setCallbacks(mCallbacks)
+                            .build();
+
+                    PhoneAuthProvider.verifyPhoneNumber(options);
+                }
+            }
+        });
+
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                progressDialog.dismiss();
+                Toast.makeText(getContext(),"OTP is Sent Completed",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+                progressDialog.dismiss();
+                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                Log.d("TAG",e.getMessage());
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                super.onCodeSent(s, forceResendingToken);
+                Toast.makeText(getContext(),"OTP is Sent Completed",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+                codeSent = s;
+                Intent intent = new Intent(getContext(), OTPActivity.class);
+                intent.putExtra("otp",codeSent);
+                intent.putExtra("coutryCode",countryCode);
+                intent.putExtra("mobile",binding.mobileEt.getText().toString());
+                startActivity(intent);
+
+            }
+        };
+
+
+        binding.countrycodepicker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                countryCode = binding.countrycodepicker.getSelectedCountryCodeWithPlus();
+            }
+        });
 
         return binding.getRoot();
     }
@@ -144,19 +224,41 @@ public class ProfileFragment extends Fragment {
 
         if (image_uri == null) {
 
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("username",username);
-            hashMap.put("address",address);
-            hashMap.put("mobile",mobile);
-            hashMap.put("isMobileVerified","false");
+            if (verifyedMobile.equals(binding.mobileEt.getText().toString())){
 
-            databaseReference.child(mAuth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void unused) {
-                    progressDialog.dismiss();
-                    Toast.makeText(getContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
-                }
-            });
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("username",username);
+                hashMap.put("address",address);
+                hashMap.put("mobile",mobile);
+                hashMap.put("countryCode",countryCode);
+                hashMap.put("isMobileVerified","true");
+
+                databaseReference.child(mAuth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }else {
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("username",username);
+                hashMap.put("address",address);
+                hashMap.put("mobile",mobile);
+                hashMap.put("countryCode",countryCode);
+                hashMap.put("isMobileVerified","false");
+
+                databaseReference.child(mAuth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        progressDialog.dismiss();
+                        Toast.makeText(getContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+
         }
         else {
 
@@ -173,10 +275,39 @@ public class ProfileFragment extends Fragment {
 
                     if (uriTask.isSuccessful()) {
 
+                        if (verifyedMobile.equals(binding.mobileEt.getText().toString())){
+
+                            HashMap<String, Object> hashMap = new HashMap<>();
+                            hashMap.put("username",username);
+                            hashMap.put("address",address);
+                            hashMap.put("mobile",mobile);
+                            hashMap.put("countryCode",countryCode);
+                            hashMap.put("isMobileVerified","true");
+                            hashMap.put("profile_pic", downloadImageUri.toString());
+
+
+                            databaseReference.child(mAuth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        }
+                    }
+                    else {
                         HashMap<String, Object> hashMap = new HashMap<>();
                         hashMap.put("username",username);
                         hashMap.put("address",address);
                         hashMap.put("mobile",mobile);
+                        hashMap.put("countryCode",countryCode);
                         hashMap.put("isMobileVerified","false");
                         hashMap.put("profile_pic", downloadImageUri.toString());
 
@@ -194,6 +325,7 @@ public class ProfileFragment extends Fragment {
                                 Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
+
                     }
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -211,9 +343,37 @@ public class ProfileFragment extends Fragment {
         databaseReference.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String username = ""+snapshot.child("username").getValue();
-                String email = ""+snapshot.child("email").getValue();
+                String username1 = ""+snapshot.child("username").getValue();
+                String email1 = ""+snapshot.child("email").getValue();
                 String profile_pic = ""+snapshot.child("profile_pic").getValue();
+                String mobile = ""+snapshot.child("mobile").getValue();
+                String address = ""+snapshot.child("address").getValue();
+                String countryCode = ""+snapshot.child("countryCode").getValue();
+
+
+                if (countryCode.equals(""+null)){
+
+                }
+                else {
+                    binding.countrycodepicker.setCountryForPhoneCode(Integer.parseInt(countryCode));
+                }
+
+
+                binding.emailEt.setText(email1);
+                binding.usernameEt.setText(username1);
+                binding.usernameTv.setText(username1);
+
+                if (mobile.equals(""+null)){
+                    binding.mobileEt.setText("");
+                }else {
+                    binding.mobileEt.setText(mobile);
+                }
+
+                if (address.equals(""+null)){
+                    binding.addressEt.setText("");
+                }else {
+                    binding.addressEt.setText(address);
+                }
 
 
                 try {
@@ -223,16 +383,8 @@ public class ProfileFragment extends Fragment {
                 }
 
                 if (snapshot.exists()){
+
                     String isMobileVerified = ""+snapshot.child("isMobileVerified").getValue();
-                    String address = ""+snapshot.child("address").getValue();
-                    String mobile = ""+snapshot.child("mobile").getValue();
-
-
-                    binding.addressEt.setText(address);
-                    binding.mobileEt.setText(mobile);
-                    binding.usernameTv.setText(username);
-
-
 
                     try {
                         if (isMobileVerified.equals("true")){
@@ -249,10 +401,8 @@ public class ProfileFragment extends Fragment {
                         e.printStackTrace();
                     }
                 }
-                else {}
+                else { }
 
-                binding.emailEt.setText(email);
-                binding.usernameEt.setText(username);
             }
 
             @Override
@@ -364,5 +514,28 @@ public class ProfileFragment extends Fragment {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LoadVerifyedMobileNumber();
+    }
+
+    private String verifyedMobile;
+    private void LoadVerifyedMobileNumber() {
+
+        DatabaseReference databaseReference = database.getReference("Users");
+        databaseReference.child(mAuth.getUid()).orderByChild("isMobileVerified").equalTo("true").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                verifyedMobile = ""+snapshot.child("mobile").getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

@@ -127,7 +127,7 @@
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="-5dp"
                         android:fontFamily="sans-serif-black"
-                        android:text="Chathura Sanjaya"
+                        android:text=""
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="23sp"
@@ -249,24 +249,65 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:hint="Mobile">
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            >
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/mobileEt"
-                                android:layout_width="match_parent"
+                            <com.hbb20.CountryCodePicker
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@color/background"
-                                android:drawableLeft="@drawable/ic_baseline_phone_android_24"
-                                android:drawableTint="@color/sub_brown"
-                                android:inputType="phone"
-                                android:drawablePadding="10dp"
-                                android:text=""/>
+                                app:ccp_areaCodeDetectedCountry="true"
+                                android:id="@+id/countrycodepicker"
+                                app:ccp_autoDetectCountry="true"
+                                android:padding="5dp"
+                                android:textAlignment="center"
+                                app:ccp_contentColor="@color/black"
+                                app:ccp_textSize="15sp" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginBottom="5dp"
+                                android:hint="Mobile">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/mobileEt"
+                                    android:layout_width="match_parent"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/background"
+                                    android:drawableLeft="@drawable/ic_baseline_phone_android_24"
+                                    android:drawableTint="@color/sub_brown"
+                                    android:inputType="phone"
+                                    android:drawablePadding="10dp"
+                                    android:text=""/>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <!--                            <EditText-->
+<!--                                android:layout_width="0dp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_weight="1"-->
+<!--                                android:id="@+id/mobileEt"-->
+<!--                                android:drawableTint="@color/black"-->
+<!--                                android:textColorHint="@color/black"-->
+<!--                                android:textColor="@color/black"-->
+<!--                                android:drawablePadding="10dp"-->
+<!--                                android:ems="10"-->
+<!--                                android:hint="Enter Mobile"-->
+<!--                                android:inputType="textPersonName"-->
+<!--                                android:padding="15dp"-->
+<!--                                android:layout_below="@id/linear" />-->
+
+
+                        </LinearLayout>
+
 
                         <Button
                             android:id="@+id/updateBtn"
@@ -274,7 +315,7 @@
                             android:layout_height="wrap_content"
                             android:text="Update"
                             android:layout_marginTop="10dp"
-                            android:padding="5dp"/>
+                            android:padding="10dp"/>
 
                     </LinearLayout>
 
