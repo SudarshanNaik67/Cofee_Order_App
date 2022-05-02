@@ -1,19 +1,24 @@
 package com.rrmchathura.cofee_order_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rrmchathura.cofee_order_app.databinding.ActivityUserCoffeeDetailsBinding;
 import com.squareup.picasso.Picasso;
 
@@ -22,7 +27,7 @@ import java.util.HashMap;
 public class User_Coffee_Details_Activity extends AppCompatActivity {
 
     ActivityUserCoffeeDetailsBinding binding;
-    private String coffeeName,coffeePrice,coffeeImage,isCustomizeAvailable,coffeeId;
+    private String coffeeName, coffeePrice, coffeeImage, isCustomizeAvailable, coffeeId;
 
     private int Quantity = 1;
     private int finalCost = 0;
@@ -43,7 +48,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
     private double smallSizeCost, mediumSizeCost, largeSizeCost, noSugarCost, smallSugarCost, mediumSugarCost, highSugarCost, additionalCreamCost, additionalStickerCost;
     private double finalSizeCost, finalSugarCost, finalAdditionalCost;
 
-    private String selectedSize,selectedSugar;
+    private String selectedSize, selectedSugar;
     private String selectedAdditions = "empty";
 
     ProgressDialog progressDialog;
@@ -217,7 +222,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                         noSugarCost = finalCost * (-0.1); //-10%
                         finalSugarCost = finalSizeCost + noSugarCost;
-                        binding.totalPriceTv.setText("Rs." + ""+finalSugarCost);
+                        binding.totalPriceTv.setText("Rs." + "" + finalSugarCost);
 
                         binding.radioGroup3.clearCheck();
                         binding.radioGroup4.clearCheck();
@@ -232,7 +237,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                     noSugarCost = finalCost * (-0.1); //-10%
                     finalSugarCost = finalCost + noSugarCost;
-                    binding.totalPriceTv.setText("Rs." + ""+finalSugarCost);
+                    binding.totalPriceTv.setText("Rs." + "" + finalSugarCost);
 
                 }
             }
@@ -255,7 +260,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                         smallSugarCost = finalCost * 0.01; //-10%
                         finalSugarCost = finalSizeCost + smallSugarCost;
-                        binding.totalPriceTv.setText("Rs." + ""+finalSugarCost);
+                        binding.totalPriceTv.setText("Rs." + "" + finalSugarCost);
 
                         binding.radioGroup3.clearCheck();
                         binding.radioGroup4.clearCheck();
@@ -270,7 +275,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                     smallSugarCost = finalCost * 0.01; //-10%
                     finalSugarCost = finalCost + smallSugarCost;
-                    binding.totalPriceTv.setText("Rs." + ""+finalSugarCost);
+                    binding.totalPriceTv.setText("Rs." + "" + finalSugarCost);
 
                 }
 
@@ -294,7 +299,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                         mediumSugarCost = finalCost * 0.02; //-10%
                         finalSugarCost = finalSizeCost + mediumSugarCost;
-                        binding.totalPriceTv.setText("Rs." + ""+finalSugarCost);
+                        binding.totalPriceTv.setText("Rs." + "" + finalSugarCost);
 
                         binding.radioGroup3.clearCheck();
                         binding.radioGroup4.clearCheck();
@@ -309,7 +314,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                     mediumSugarCost = finalCost * 0.02; //-10%
                     finalSugarCost = finalCost + mediumSugarCost;
-                    binding.totalPriceTv.setText("Rs." + ""+finalSugarCost);
+                    binding.totalPriceTv.setText("Rs." + "" + finalSugarCost);
 
                 }
             }
@@ -332,7 +337,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                         highSugarCost = finalCost * 0.03; //-10%
                         finalSugarCost = finalSizeCost + highSugarCost;
-                        binding.totalPriceTv.setText("Rs." + ""+finalSugarCost);
+                        binding.totalPriceTv.setText("Rs." + "" + finalSugarCost);
 
                         binding.radioGroup3.clearCheck();
                         binding.radioGroup4.clearCheck();
@@ -347,7 +352,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                     highSugarCost = finalCost * 0.03; //-10%
                     finalSugarCost = finalCost + highSugarCost;
-                    binding.totalPriceTv.setText("Rs." + ""+finalSugarCost);
+                    binding.totalPriceTv.setText("Rs." + "" + finalSugarCost);
 
                 }
             }
@@ -366,7 +371,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                         additionalCreamCost = finalCost * 0.05;
                         finalAdditionalCost = finalSugarCost + additionalCreamCost;
-                        binding.totalPriceTv.setText("Rs." + ""+finalAdditionalCost);
+                        binding.totalPriceTv.setText("Rs." + "" + finalAdditionalCost);
 
                         binding.radioGroup4.clearCheck();
                         binding.additionCreamRB.setChecked(true);
@@ -380,7 +385,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                     additionalCreamCost = finalCost * 0.05; //-10%
                     finalAdditionalCost = finalSugarCost + additionalCreamCost;
-                    binding.totalPriceTv.setText("Rs." + ""+finalAdditionalCost);
+                    binding.totalPriceTv.setText("Rs." + "" + finalAdditionalCost);
 
                 }
 
@@ -400,7 +405,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                         additionalStickerCost = finalCost * 0.01;
                         finalAdditionalCost = finalSugarCost + additionalStickerCost;
-                        binding.totalPriceTv.setText("Rs." + ""+finalAdditionalCost);
+                        binding.totalPriceTv.setText("Rs." + "" + finalAdditionalCost);
 
                         binding.radioGroup4.clearCheck();
                         binding.additionalStickerRB.setChecked(true);
@@ -415,7 +420,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
                     additionalStickerCost = finalCost * 0.01;
                     finalAdditionalCost = finalSugarCost + additionalStickerCost;
-                    binding.totalPriceTv.setText("Rs." + ""+finalAdditionalCost);
+                    binding.totalPriceTv.setText("Rs." + "" + finalAdditionalCost);
 
                 }
 
@@ -426,21 +431,24 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String finalQuantity = binding.quantityTv.getText().toString();
+                if (TextUtils.isEmpty(address) && TextUtils.isEmpty(mobile)) {
+                    Toast.makeText(User_Coffee_Details_Activity.this, "Please update address & mobile", Toast.LENGTH_SHORT).show();
+                } else {
+                    String finalQuantity = binding.quantityTv.getText().toString();
 
-                if (isCustomizeAvailable.equals("true")){
+                    if (isCustomizeAvailable.equals("true")) {
 
-                    if ((smallSizeChecked || mediumSizeChecked || largeSizeChecked ) && (noSugarChecked || smallSugarChecked || mediumSugarChecked || highSugarChecked)){
-                        String finalCostOfCoffee = binding.totalPriceTv.getText().toString().replace("Rs.","");
+                        if ((smallSizeChecked || mediumSizeChecked || largeSizeChecked) && (noSugarChecked || smallSugarChecked || mediumSugarChecked || highSugarChecked)) {
+                            String finalCostOfCoffee = binding.totalPriceTv.getText().toString().replace("Rs.", "");
+                            dialogBox(finalCostOfCoffee, finalQuantity);
+                        } else {
+                            Toast.makeText(User_Coffee_Details_Activity.this, "Please select at least Size & Sugar", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        String finalCostOfCoffee = binding.totalPriceTv.getText().toString().replace("Rs.", "");
                         dialogBox(finalCostOfCoffee, finalQuantity);
                     }
-                    else {
-                        Toast.makeText(User_Coffee_Details_Activity.this,"Please select at least Size & Sugar",Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else {
-                    String finalCostOfCoffee = binding.totalPriceTv.getText().toString().replace("Rs.","");
-                    dialogBox(finalCostOfCoffee,finalQuantity);
+
                 }
 
 
@@ -454,10 +462,10 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
 
         AlertDialog alertDialog = new AlertDialog.Builder(User_Coffee_Details_Activity.this).create();
         alertDialog.setTitle("Confirm Order");
-        alertDialog.setMessage("You Need To Pay "+"Rs."+finalCostOfCoffee);
+        alertDialog.setMessage("You Need To Pay " + "Rs." + finalCostOfCoffee);
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Confirm", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                AddCoffeeToCart(finalCostOfCoffee,finalQuantity,alertDialog);
+                AddCoffeeToCart(finalCostOfCoffee, finalQuantity, alertDialog);
             }
         });
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
@@ -475,81 +483,86 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
         progressDialog.setMessage("Coffee adding to cart");
         progressDialog.show();
 
+
         DatabaseReference databaseReference = database.getReference("Users");
 
         String timeStamp = String.valueOf(System.currentTimeMillis());
 
-        if (isCustomizeAvailable.equals("true")){
+        if (isCustomizeAvailable.equals("true")) {
 
-            if (selectedAdditions.equals("empty")){
+            if (selectedAdditions.equals("empty")) {
 
-                HashMap<String,Object> hashMap = new HashMap<>();
-                hashMap.put("coffeeId",coffeeId);
-                hashMap.put("coffeeName",coffeeName);
-                hashMap.put("coffeeImage",""+coffeeImage);
-                hashMap.put("quantity",finalQuantity);
-                hashMap.put("selectedSize",selectedSize);
-                hashMap.put("selectedSugar",selectedSugar);
-                hashMap.put("selectedAdditions","empty");
-                hashMap.put("isCustomizeAvailable",""+isCustomizeAvailable);
-                hashMap.put("finalPrice",""+finalCostOfCoffee);
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("coffeeId", coffeeId);
+                hashMap.put("coffeeName", coffeeName);
+                hashMap.put("coffeeImage", "" + coffeeImage);
+                hashMap.put("quantity", finalQuantity);
+                hashMap.put("selectedSize", selectedSize);
+                hashMap.put("selectedSugar", selectedSugar);
+                hashMap.put("selectedAdditions", "empty");
+                hashMap.put("timeStamp", "" + timeStamp);
+                hashMap.put("isCustomizeAvailable", "" + isCustomizeAvailable);
+                hashMap.put("finalPrice", "" + finalCostOfCoffee);
+                hashMap.put("uid", "" + mAuth.getUid());
 
                 databaseReference.child(mAuth.getUid()).child("CartItems").child(timeStamp).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         alertDialog.dismiss();
                         progressDialog.dismiss();
-                        Toast.makeText(User_Coffee_Details_Activity.this,"Coffee added to cart..",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(User_Coffee_Details_Activity.this, "Coffee added to cart..", Toast.LENGTH_SHORT).show();
                         ClearData();
 
                     }
                 });
 
-            }
-            else {
+            } else {
 
-                HashMap<String,Object> hashMap1 = new HashMap<>();
-                hashMap1.put("coffeeId",coffeeId);
-                hashMap1.put("coffeeName",coffeeName);
-                hashMap1.put("coffeeImage",""+coffeeImage);
-                hashMap1.put("quantity",finalQuantity);
-                hashMap1.put("selectedSize",selectedSize);
-                hashMap1.put("selectedSugar",selectedSugar);
-                hashMap1.put("selectedAdditions",selectedAdditions);
-                hashMap1.put("isCustomizeAvailable",""+isCustomizeAvailable);
-                hashMap1.put("finalPrice",""+finalCostOfCoffee);
+                HashMap<String, Object> hashMap1 = new HashMap<>();
+                hashMap1.put("coffeeId", coffeeId);
+                hashMap1.put("coffeeName", coffeeName);
+                hashMap1.put("coffeeImage", "" + coffeeImage);
+                hashMap1.put("quantity", finalQuantity);
+                hashMap1.put("selectedSize", selectedSize);
+                hashMap1.put("timeStamp", "" + timeStamp);
+                hashMap1.put("selectedSugar", selectedSugar);
+                hashMap1.put("selectedAdditions", selectedAdditions);
+                hashMap1.put("isCustomizeAvailable", "" + isCustomizeAvailable);
+                hashMap1.put("finalPrice", "" + finalCostOfCoffee);
+                hashMap1.put("uid", "" + mAuth.getUid());
 
                 databaseReference.child(mAuth.getUid()).child("CartItems").child(timeStamp).setValue(hashMap1).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         alertDialog.dismiss();
                         progressDialog.dismiss();
-                        Toast.makeText(User_Coffee_Details_Activity.this,"Coffee added to cart..",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(User_Coffee_Details_Activity.this, "Coffee added to cart..", Toast.LENGTH_SHORT).show();
                         ClearData();
 
                     }
                 });
                 alertDialog.dismiss();
             }
-        }
-        else {
-            HashMap<String,Object> hashMap2 = new HashMap<>();
-            hashMap2.put("coffeeId",coffeeId);
-            hashMap2.put("coffeeName",coffeeName);
-            hashMap2.put("coffeeImage",""+coffeeImage);
-            hashMap2.put("quantity",finalQuantity);
-            hashMap2.put("isCustomizeAvailable",""+isCustomizeAvailable);
-            hashMap2.put("selectedSize","empty");
-            hashMap2.put("selectedSugar","empty");
-            hashMap2.put("selectedAdditions","empty");
-            hashMap2.put("finalPrice",""+finalCostOfCoffee);
+        } else {
+            HashMap<String, Object> hashMap2 = new HashMap<>();
+            hashMap2.put("coffeeId", coffeeId);
+            hashMap2.put("coffeeName", coffeeName);
+            hashMap2.put("coffeeImage", "" + coffeeImage);
+            hashMap2.put("quantity", finalQuantity);
+            hashMap2.put("isCustomizeAvailable", "" + isCustomizeAvailable);
+            hashMap2.put("selectedSize", "empty");
+            hashMap2.put("timeStamp", "" + timeStamp);
+            hashMap2.put("selectedSugar", "empty");
+            hashMap2.put("selectedAdditions", "empty");
+            hashMap2.put("finalPrice", "" + finalCostOfCoffee);
+            hashMap2.put("uid", "" + mAuth.getUid());
 
             databaseReference.child(mAuth.getUid()).child("CartItems").child(timeStamp).setValue(hashMap2).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     alertDialog.dismiss();
                     progressDialog.dismiss();
-                    Toast.makeText(User_Coffee_Details_Activity.this,"Coffee added to cart..",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(User_Coffee_Details_Activity.this, "Coffee added to cart..", Toast.LENGTH_SHORT).show();
                     ClearData();
                 }
             });
@@ -568,5 +581,32 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LoadUserData();
+    }
+
+    private String address = "", mobile = "";
+
+    private void LoadUserData() {
+        DatabaseReference databaseReference = database.getReference("Users");
+        databaseReference.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    address = "" + snapshot.child("address").getValue();
+                    mobile = "" + snapshot.child("mobile").getValue();
+                } else
+                {}
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

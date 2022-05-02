@@ -14,14 +14,30 @@
         android:background="@color/background"
         android:backgroundTint="@color/brown"
         app:title="Cart"
-        app:titleTextColor="@color/white"/>
+        app:titleTextColor="@color/white">
 
+        <TextView
+            android:id="@+id/totalPriceCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="end"
+            android:text="Rs.1200"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+    </androidx.appcompat.widget.Toolbar>
 
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
         android:layout_below="@id/toolbar">
 
 
@@ -42,6 +58,8 @@
 
 
         </LinearLayout>
+
+
 
     </ScrollView>
 

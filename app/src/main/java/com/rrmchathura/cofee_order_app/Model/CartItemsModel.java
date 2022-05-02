@@ -2,12 +2,12 @@ package com.rrmchathura.cofee_order_app.Model;
 
 public class CartItemsModel {
 
-    String coffeeId,coffeeImage,coffeeName,finalPrice,isCustomizeAvailable,quantity,selectedAdditions,selectedSize,selectedSugar;
+    String coffeeId,coffeeImage,coffeeName,finalPrice,isCustomizeAvailable,quantity,selectedAdditions,selectedSize,selectedSugar,timeStamp,uid;
 
     public CartItemsModel() {
     }
 
-    public CartItemsModel(String coffeeId, String coffeeImage, String coffeeName, String finalPrice, String isCustomizeAvailable, String quantity, String selectedAdditions, String selectedSize, String selectedSugar) {
+    public CartItemsModel(String coffeeId, String coffeeImage, String coffeeName, String finalPrice, String isCustomizeAvailable, String quantity, String selectedAdditions, String selectedSize, String selectedSugar, String timeStamp, String uid) {
         this.coffeeId = coffeeId;
         this.coffeeImage = coffeeImage;
         this.coffeeName = coffeeName;
@@ -17,10 +17,20 @@ public class CartItemsModel {
         this.selectedAdditions = selectedAdditions;
         this.selectedSize = selectedSize;
         this.selectedSugar = selectedSugar;
+        this.timeStamp = timeStamp;
+        this.uid = uid;
     }
 
     public String getCoffeeId() {
         return coffeeId;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
     }
 
     public void setCoffeeId(String coffeeId) {
@@ -89,5 +99,13 @@ public class CartItemsModel {
 
     public void setSelectedSugar(String selectedSugar) {
         this.selectedSugar = selectedSugar;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

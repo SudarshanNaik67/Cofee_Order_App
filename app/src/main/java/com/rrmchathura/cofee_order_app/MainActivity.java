@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.badge.BadgeDrawable;
@@ -17,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rrmchathura.cofee_order_app.Fragments.CartFragment;
 import com.rrmchathura.cofee_order_app.Fragments.HomeFragment;
+import com.rrmchathura.cofee_order_app.Fragments.ProfileFragment;
 import com.rrmchathura.cofee_order_app.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     HomeFragment homeFragment = new HomeFragment();
     CartFragment cartFragment = new CartFragment();
+    ProfileFragment profileFragment = new ProfileFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.cart:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, cartFragment).commit();
+                        return true;
+
+                    case R.id.profile:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
                         return true;
                 }
 

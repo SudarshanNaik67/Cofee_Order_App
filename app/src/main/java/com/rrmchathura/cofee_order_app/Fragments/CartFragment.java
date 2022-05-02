@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class CartFragment extends Fragment {
     FirebaseAuth mAuth;
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,6 +52,39 @@ public class CartFragment extends Fragment {
     public void onStart() {
         super.onStart();
         LoadCartItems();
+        LoadTotalPrice();
+    }
+
+    private void LoadTotalPrice() {
+
+        DatabaseReference databaseReference = database.getReference("Users");
+        databaseReference.child(mAuth.getUid()).child("CartItems").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                double TotalPrice = 0;
+                if (snapshot.exists()){
+
+                    binding.totalPriceCount.setVisibility(View.VISIBLE);
+
+                    for (DataSnapshot ds : snapshot.getChildren()){
+                        String finalPrice = ""+ds.child("finalPrice").getValue();
+
+                        double value = Double.valueOf(finalPrice);
+                        TotalPrice += value;
+
+                        binding.totalPriceCount.setText(String.valueOf("Rs. " + TotalPrice));
+                    }
+                }
+                else {
+                    binding.totalPriceCount.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void LoadCartItems() {
@@ -60,11 +95,11 @@ public class CartFragment extends Fragment {
         databaseReference.child(mAuth.getUid()).child("CartItems").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                cartItemsList.clear();
                 if (snapshot.exists()){
                     for (DataSnapshot ds : snapshot.getChildren()){
                         cartItemsModel = ds.getValue(CartItemsModel.class);
                         cartItemsList.add(cartItemsModel);
-
 
                     }
 
