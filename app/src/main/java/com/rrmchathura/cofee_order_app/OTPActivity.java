@@ -35,6 +35,13 @@ public class OTPActivity extends AppCompatActivity {
         progressDialog.setTitle("Please Wait");
         progressDialog.setCanceledOnTouchOutside(false);
 
+        binding.resendTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
         binding.submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override

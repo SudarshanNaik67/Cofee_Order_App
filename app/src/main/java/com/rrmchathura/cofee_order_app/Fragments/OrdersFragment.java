@@ -74,7 +74,6 @@ public class OrdersFragment extends Fragment {
                     binding.recycleview.setVisibility(View.VISIBLE);
                 }
 
-
                 showOrdersAdapter = new ShowOrdersAdapter(getActivity(),ordersList);
                 binding.recycleview.setAdapter(showOrdersAdapter);
                 showOrdersAdapter.notifyDataSetChanged();

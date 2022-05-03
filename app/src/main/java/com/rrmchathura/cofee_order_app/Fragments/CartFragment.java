@@ -1,7 +1,9 @@
 package com.rrmchathura.cofee_order_app.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -60,7 +62,23 @@ public class CartFragment extends Fragment {
         binding.checkOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SaveOrder();
+                String finalPrice = binding.totalPriceCount.getText().toString();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Confirm");
+                builder.setMessage("You need to pay "+finalPrice);
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SaveOrder();
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.show();
+
             }
         });
 

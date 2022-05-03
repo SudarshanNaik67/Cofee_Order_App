@@ -103,11 +103,14 @@
         android:id="@+id/checkOutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/pay"
-        app:tint="@color/white"
         android:tooltipText="PAY"
-        android:layout_margin="20dp"/>
+        app:tint="@color/white" />
 
 </RelativeLayout>
