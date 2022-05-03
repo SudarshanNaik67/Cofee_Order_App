@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rrmchathura.cofee_order_app.Fragments.CartFragment;
 import com.rrmchathura.cofee_order_app.Fragments.HomeFragment;
+import com.rrmchathura.cofee_order_app.Fragments.OrdersFragment;
 import com.rrmchathura.cofee_order_app.Fragments.ProfileFragment;
 import com.rrmchathura.cofee_order_app.databinding.ActivityMainBinding;
 
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     HomeFragment homeFragment = new HomeFragment();
     CartFragment cartFragment = new CartFragment();
     ProfileFragment profileFragment = new ProfileFragment();
+    OrdersFragment ordersFragment = new OrdersFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
+                        return true;
+
+                    case R.id.orders:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, ordersFragment).commit();
                         return true;
                 }
 

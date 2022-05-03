@@ -55,8 +55,9 @@ public class OTPActivity extends AppCompatActivity {
                //     binding.progressbarofotpauth.setVisibility(View.VISIBLE);
                     String codereciever = getIntent().getStringExtra("otp");
                     String countrycode1 = getIntent().getStringExtra("coutryCode");
+                    String mobile = getIntent().getStringExtra("mobile");
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(codereciever,enterdotp);
-                    addphonenumbertodatabse();
+                    addphonenumbertodatabse(mobile);
                 } else {
                     Toast.makeText(OTPActivity.this, "Enter All numbers", Toast.LENGTH_SHORT).show();
                 }
@@ -66,7 +67,7 @@ public class OTPActivity extends AppCompatActivity {
         numberOtpMove();
     }
 
-    private void addphonenumbertodatabse() {
+    private void addphonenumbertodatabse(String mobile) {
 
         progressDialog.setMessage("updating status");
         progressDialog.show();
@@ -74,6 +75,7 @@ public class OTPActivity extends AppCompatActivity {
         HashMap<String,Object> obj = new HashMap<>();
 
         obj.put("isMobileVerified","true");
+        obj.put("mobile",mobile);
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         databaseReference.child(FirebaseAuth.getInstance().getUid()).updateChildren(obj).addOnSuccessListener(new OnSuccessListener<Void>() {

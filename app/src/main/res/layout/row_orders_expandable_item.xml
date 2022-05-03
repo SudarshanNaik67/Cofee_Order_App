@@ -23,25 +23,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:id="@+id/deleteBtn"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@android:color/transparent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/delete" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_toStartOf="@id/deleteBtn">
+                    android:layout_marginBottom="10dp">
 
 
                     <ImageView
@@ -49,10 +36,10 @@
                         android:layout_width="66dp"
                         android:layout_height="98dp"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:background="@android:color/transparent"
                         android:padding="10dp"
-                        android:layout_marginStart="10dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/spinner" />
 

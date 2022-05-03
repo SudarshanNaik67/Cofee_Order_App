@@ -431,7 +431,7 @@ public class User_Coffee_Details_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (TextUtils.isEmpty(address) && TextUtils.isEmpty(mobile)) {
+                if (address.equals(""+null) && mobile.equals(""+null)) {
                     Toast.makeText(User_Coffee_Details_Activity.this, "Please update address & mobile", Toast.LENGTH_SHORT).show();
                 } else {
                     String finalQuantity = binding.quantityTv.getText().toString();

@@ -74,14 +74,14 @@ public class ProfileFragment extends Fragment {
     private static final int IMAGE_PICK_CAMERA_CODE = 400;
 
     private Uri image_uri;
-    private  String countryCode,phoneNumber,codeSent;
+    private String countryCode, phoneNumber, codeSent;
 
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentProfileBinding.inflate(inflater,container,false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -124,20 +124,16 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 String number;
                 number = binding.mobileEt.getText().toString();
-                if (number.isEmpty())
-                {
-                    Toast.makeText(getContext(),"Please Enter Your Number",Toast.LENGTH_SHORT).show();
-                }
-                else if (number.length()<10)
-                {
-                    Toast.makeText(getContext(),"Please Enter Correct Number",Toast.LENGTH_SHORT).show();
-                }
-                else {
+                if (number.isEmpty()) {
+                    Toast.makeText(getContext(), "Please Enter Your Number", Toast.LENGTH_SHORT).show();
+                } else if (number.length() < 10) {
+                    Toast.makeText(getContext(), "Please Enter Correct Number", Toast.LENGTH_SHORT).show();
+                } else {
 
                     progressDialog.setMessage("Sending OTP.....");
                     progressDialog.show();
 
-                    phoneNumber = countryCode+number;
+                    phoneNumber = countryCode + number;
 
                     PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth).setPhoneNumber(phoneNumber)
                             .setTimeout(60L, TimeUnit.SECONDS)
@@ -150,30 +146,30 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                 progressDialog.dismiss();
-                Toast.makeText(getContext(),"OTP is Sent Completed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "OTP is Sent Completed", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
                 progressDialog.dismiss();
-                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
-                Log.d("TAG",e.getMessage());
+                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("TAG", e.getMessage());
             }
 
             @Override
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
-                Toast.makeText(getContext(),"OTP is Sent Completed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "OTP is Sent Completed", Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
                 codeSent = s;
                 Intent intent = new Intent(getContext(), OTPActivity.class);
-                intent.putExtra("otp",codeSent);
-                intent.putExtra("coutryCode",countryCode);
-                intent.putExtra("mobile",binding.mobileEt.getText().toString());
+                intent.putExtra("otp", codeSent);
+                intent.putExtra("coutryCode", countryCode);
+                intent.putExtra("mobile", binding.mobileEt.getText().toString());
                 startActivity(intent);
 
             }
@@ -190,26 +186,23 @@ public class ProfileFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private String username="",address="",mobile="";
+    private String username = "", address = "", mobile = "";
+
     private void ValidateData() {
 
-        username = binding.emailEt.getText().toString().trim();
+        username = binding.usernameEt.getText().toString().trim();
         address = binding.addressEt.getText().toString().trim();
         mobile = binding.mobileEt.getText().toString().trim();
 
-        if (TextUtils.isEmpty(username)){
+        if (TextUtils.isEmpty(username)) {
             binding.usernameEt.setError("Username Required");
-        }
-        else if (TextUtils.isEmpty(address)){
+        } else if (TextUtils.isEmpty(address)) {
             binding.addressEt.setError("Address Required");
-        }
-        else if (TextUtils.isEmpty(mobile)){
+        } else if (TextUtils.isEmpty(mobile)) {
             binding.mobileEt.setError("Required Contact No");
-        }
-        else if (mobile.length() < 10) {
+        } else if (mobile.length() < 10) {
             binding.mobileEt.setError("Invalid Number");
-        }
-        else {
+        } else {
             updateData();
         }
     }
@@ -224,14 +217,14 @@ public class ProfileFragment extends Fragment {
 
         if (image_uri == null) {
 
-            if (verifyedMobile.equals(binding.mobileEt.getText().toString())){
+            if (verifyedMobile.equals(binding.mobileEt.getText().toString())) {
 
                 HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("username",username);
-                hashMap.put("address",address);
-                hashMap.put("mobile",mobile);
-                hashMap.put("countryCode",countryCode);
-                hashMap.put("isMobileVerified","true");
+                hashMap.put("username", username);
+                hashMap.put("address", address);
+                hashMap.put("mobile", mobile);
+                hashMap.put("countryCode", countryCode);
+                hashMap.put("isMobileVerified", "true");
 
                 databaseReference.child(mAuth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -241,13 +234,13 @@ public class ProfileFragment extends Fragment {
                     }
                 });
 
-            }else {
+            } else {
                 HashMap<String, Object> hashMap = new HashMap<>();
-                hashMap.put("username",username);
-                hashMap.put("address",address);
-                hashMap.put("mobile",mobile);
-                hashMap.put("countryCode",countryCode);
-                hashMap.put("isMobileVerified","false");
+                hashMap.put("username", username);
+                hashMap.put("address", address);
+                hashMap.put("mobile", mobile);
+                hashMap.put("countryCode", countryCode);
+                hashMap.put("isMobileVerified", "false");
 
                 databaseReference.child(mAuth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -259,8 +252,7 @@ public class ProfileFragment extends Fragment {
             }
 
 
-        }
-        else {
+        } else {
 
             progressDialog.setMessage("Updating user data with profile pic....");
             progressDialog.show();
@@ -275,14 +267,14 @@ public class ProfileFragment extends Fragment {
 
                     if (uriTask.isSuccessful()) {
 
-                        if (verifyedMobile.equals(binding.mobileEt.getText().toString())){
+                        if (verifyedMobile.equals(binding.mobileEt.getText().toString())) {
 
                             HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put("username",username);
-                            hashMap.put("address",address);
-                            hashMap.put("mobile",mobile);
-                            hashMap.put("countryCode",countryCode);
-                            hashMap.put("isMobileVerified","true");
+                            hashMap.put("username", username);
+                            hashMap.put("address", address);
+                            hashMap.put("mobile", mobile);
+                            hashMap.put("countryCode", countryCode);
+                            hashMap.put("isMobileVerified", "true");
                             hashMap.put("profile_pic", downloadImageUri.toString());
 
 
@@ -301,14 +293,13 @@ public class ProfileFragment extends Fragment {
                             });
 
                         }
-                    }
-                    else {
+                    } else {
                         HashMap<String, Object> hashMap = new HashMap<>();
-                        hashMap.put("username",username);
-                        hashMap.put("address",address);
-                        hashMap.put("mobile",mobile);
-                        hashMap.put("countryCode",countryCode);
-                        hashMap.put("isMobileVerified","false");
+                        hashMap.put("username", username);
+                        hashMap.put("address", address);
+                        hashMap.put("mobile", mobile);
+                        hashMap.put("countryCode", countryCode);
+                        hashMap.put("isMobileVerified", "false");
                         hashMap.put("profile_pic", downloadImageUri.toString());
 
 
@@ -343,65 +334,65 @@ public class ProfileFragment extends Fragment {
         databaseReference.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String username1 = ""+snapshot.child("username").getValue();
-                String email1 = ""+snapshot.child("email").getValue();
-                String profile_pic = ""+snapshot.child("profile_pic").getValue();
-                String mobile = ""+snapshot.child("mobile").getValue();
-                String address = ""+snapshot.child("address").getValue();
-                String countryCode = ""+snapshot.child("countryCode").getValue();
+                String username = "" + snapshot.child("username").getValue();
+                String email = "" + snapshot.child("email").getValue();
+                String profile_pic = "" + snapshot.child("profile_pic").getValue();
+                String mobile = "" + snapshot.child("mobile").getValue();
+                String address = "" + snapshot.child("address").getValue();
+                String countryCode = "" + snapshot.child("countryCode").getValue();
+                String isMobileVerified = "" + snapshot.child("isMobileVerified").getValue();
+
+                if (isMobileVerified.equals("true")) {
+                    verifyedMobile = "" + snapshot.child("mobile").getValue();
+                } else { }
 
 
-                if (countryCode.equals(""+null)){
+                if (countryCode.equals("" + null)) {
 
-                }
-                else {
+                } else {
                     binding.countrycodepicker.setCountryForPhoneCode(Integer.parseInt(countryCode));
                 }
 
 
-                binding.emailEt.setText(email1);
-                binding.usernameEt.setText(username1);
-                binding.usernameTv.setText(username1);
+                binding.emailEt.setText(email);
+                binding.usernameEt.setText(username);
+                binding.usernameTv.setText(username);
 
-                if (mobile.equals(""+null)){
+                if (mobile.equals("" + null)) {
                     binding.mobileEt.setText("");
-                }else {
+                } else {
                     binding.mobileEt.setText(mobile);
                 }
 
-                if (address.equals(""+null)){
+                if (address.equals("" + null)) {
                     binding.addressEt.setText("");
-                }else {
+                } else {
                     binding.addressEt.setText(address);
                 }
 
 
                 try {
                     Picasso.get().load(profile_pic).placeholder(R.drawable.man).into(binding.profileIv);
-                }catch (Exception e){
+                } catch (Exception e) {
                     binding.profileIv.setImageResource(R.drawable.man);
                 }
 
-                if (snapshot.exists()){
-
-                    String isMobileVerified = ""+snapshot.child("isMobileVerified").getValue();
+                if (snapshot.exists()) {
 
                     try {
-                        if (isMobileVerified.equals("true")){
+                        if (isMobileVerified.equals("true")) {
                             binding.verifyMobile.setVisibility(View.GONE);
-                        }
-                        else if (isMobileVerified.equals("false")){
+                        } else if (isMobileVerified.equals("false")) {
                             binding.verifyMobile.setVisibility(View.VISIBLE);
-                        }
-                        else {
+                        } else {
                             binding.verifyMobile.setVisibility(View.GONE);
                         }
 
-                    }catch (Exception e ){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
+                } else {
                 }
-                else { }
 
             }
 
@@ -523,13 +514,14 @@ public class ProfileFragment extends Fragment {
     }
 
     private String verifyedMobile;
+
     private void LoadVerifyedMobileNumber() {
 
         DatabaseReference databaseReference = database.getReference("Users");
-        databaseReference.child(mAuth.getUid()).orderByChild("isMobileVerified").equalTo("true").addValueEventListener(new ValueEventListener() {
+        databaseReference.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                verifyedMobile = ""+snapshot.child("mobile").getValue();
+
             }
 
             @Override
@@ -538,4 +530,6 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+
 }

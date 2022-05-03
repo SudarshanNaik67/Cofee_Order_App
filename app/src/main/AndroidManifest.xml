@@ -18,10 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cofee_Order_App">
         <activity
+            android:name=".Show_Order_Details_Activity"
+            android:exported="false" />
+        <activity
             android:name=".OTPActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".User_Coffee_Details_Activity"
             android:exported="false" />

@@ -16,21 +16,41 @@
         app:title="Cart"
         app:titleTextColor="@color/white">
 
-        <TextView
-            android:id="@+id/totalPriceCount"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="20dp"
-            android:fontFamily="sans-serif-black"
-            android:gravity="end"
-            android:text="Rs.1200"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/totalPriceCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="sans-serif-black"
+                android:gravity="end"
+                android:text="Rs.1200"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+
+        </RelativeLayout>
+
 
     </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+
+
+
+    </RelativeLayout>
 
 
     <ScrollView
@@ -41,11 +61,10 @@
         android:layout_below="@id/toolbar">
 
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:orientation="vertical">
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -57,10 +76,23 @@
                 tools:listitem="@layout/row_cart_item" />
 
 
-        </LinearLayout>
+
+
+        </RelativeLayout>
 
 
 
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/checkOutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/pay"
+        app:tint="@color/white"
+        android:tooltipText="PAY"
+        android:layout_margin="20dp"/>
 
 </RelativeLayout>
