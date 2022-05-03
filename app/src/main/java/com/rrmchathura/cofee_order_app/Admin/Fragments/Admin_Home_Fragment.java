@@ -82,7 +82,11 @@ public class Admin_Home_Fragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                try {
+                    coffeeAdapter.getFilter().filter(editable);
+                } catch (Exception e) {
+                    LoadAllCoffee();
+                }
 
             }
         });

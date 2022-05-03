@@ -106,8 +106,6 @@ public class ShowOrderDetailsAdapter extends RecyclerView.Adapter<ShowOrderDetai
                 else {}
             }
 
-
-
         }else {
             holder.customizeItemsLL.setVisibility(View.GONE);
         }

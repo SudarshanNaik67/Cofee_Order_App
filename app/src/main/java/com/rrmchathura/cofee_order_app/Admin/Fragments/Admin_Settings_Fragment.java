@@ -76,7 +76,11 @@ public class Admin_Settings_Fragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                try {
+                    coffeeSettingsAdapter.getFilter().filter(editable);
+                } catch (Exception e) {
+                    LoadAllCoffee();
+                }
 
             }
         });

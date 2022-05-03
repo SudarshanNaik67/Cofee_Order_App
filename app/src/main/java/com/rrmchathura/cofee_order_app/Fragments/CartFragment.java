@@ -77,12 +77,20 @@ public class CartFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 cartItemsList.clear();
                 if (snapshot.exists()) {
+
+                    binding.lottie.setVisibility(View.GONE);
+                    binding.recycleview.setVisibility(View.VISIBLE);
+
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         cartItemsModel = ds.getValue(CartItemsModel.class);
                         cartItemsList.add(cartItemsModel);
 
                     }
 
+                }
+                else {
+                    binding.lottie.setVisibility(View.VISIBLE);
+                    binding.recycleview.setVisibility(View.GONE);
                 }
             }
 

@@ -6,6 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,7 @@ public class HomeFragment extends Fragment {
     UserCoffeeAdapter userCoffeeAdapter;
     ArrayList<CoffeeModel> coffeeList;
     CoffeeModel coffeeModel;
+    boolean searchEtVisible;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +43,44 @@ public class HomeFragment extends Fragment {
 
         database = FirebaseDatabase.getInstance();
 
+        binding.searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (searchEtVisible) {
+                    binding.visibleLayout.setVisibility(View.GONE);
+                    searchEtVisible = false;
 
+                } else {
+                    binding.visibleLayout.setVisibility(View.VISIBLE);
+                    searchEtVisible = true;
+                }
+            }
+        });
+
+        binding.searchET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                try {
+                    userCoffeeAdapter.getFilter().filter(charSequence);
+                } catch (Exception e) {
+                    LoadAllCoffee();
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                try {
+                    userCoffeeAdapter.getFilter().filter(editable);
+                } catch (Exception e) {
+                    LoadAllCoffee();
+                }
+
+            }
+        });
 
         return binding.getRoot();
     }

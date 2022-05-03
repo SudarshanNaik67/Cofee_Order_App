@@ -66,12 +66,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottie"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:visibility="gone"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                android:elevation="2dp"
+                android:scaleType="fitCenter"
+                app:lottie_autoPlay="true"
+                app:lottie_rawRes="@raw/no_data"
+                app:lottie_repeatCount="1000"
+                app:lottie_repeatMode="restart" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycleview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="5dp"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/row_cart_item" />
 

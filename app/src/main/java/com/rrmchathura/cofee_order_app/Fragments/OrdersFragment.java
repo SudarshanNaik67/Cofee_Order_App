@@ -58,11 +58,22 @@ public class OrdersFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ordersList.clear();
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    OrdersModel ordersModel = ds.getValue(OrdersModel.class);
-                    ordersList.add(ordersModel);
+                if (snapshot.exists()){
 
+                    binding.lottie.setVisibility(View.GONE);
+                    binding.recycleview.setVisibility(View.VISIBLE);
+
+                    for (DataSnapshot ds : snapshot.getChildren()){
+                        OrdersModel ordersModel = ds.getValue(OrdersModel.class);
+                        ordersList.add(ordersModel);
+
+                    }
                 }
+                else {
+                    binding.lottie.setVisibility(View.VISIBLE);
+                    binding.recycleview.setVisibility(View.VISIBLE);
+                }
+
 
                 showOrdersAdapter = new ShowOrdersAdapter(getActivity(),ordersList);
                 binding.recycleview.setAdapter(showOrdersAdapter);

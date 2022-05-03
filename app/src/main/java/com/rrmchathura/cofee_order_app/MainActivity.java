@@ -66,8 +66,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         BadgeDrawable badgeDrawable = binding.bottomNavigation.getOrCreateBadge(R.id.cart);
+        BadgeDrawable badgeDrawable1 = binding.bottomNavigation.getOrCreateBadge(R.id.orders);
         LoadCartCount(badgeDrawable);
+        LoadOrdersCount(badgeDrawable1);
 
+    }
+
+    private void LoadOrdersCount(BadgeDrawable badgeDrawable1) {
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        databaseReference.child(FirebaseAuth.getInstance().getUid()).child("Orders").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                long count = snapshot.getChildrenCount();
+                badgeDrawable1.setNumber((int) count);
+
+                if (count == 0){
+                    badgeDrawable1.setVisible(false);
+                }
+                else {
+                    badgeDrawable1.setVisible(true);
+                    badgeDrawable1.setBackgroundColor(getResources().getColor(R.color.brown));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void LoadCartCount(BadgeDrawable badgeDrawable) {
