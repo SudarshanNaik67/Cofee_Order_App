@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable-hdpi/radio_selector_medium_size.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable-hdpi/radio_selector_small_sugar.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/bottom_navbar_bg.xml" value="0.12" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/box_bg.xml" value="0.152" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/button_background.xml" value="0.1575" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/button_bg.xml" value="0.1895" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/button_state.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/cart_btn.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/ic_baseline_visibility_24.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/ic_outline_shopping_cart_24.xml" value="0.1055" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/oval_shape.xml" value="0.10400000000000001" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_normal.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selected.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selector.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selector_addition_cream.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selector_addition_ice.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selector_hight_sugar.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selector_large_size.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selector_medium_size.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selector_medium_sugar.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selector_no_sugar.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/radio_selector_sugar_small.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/search_bg_new.xml" value="0.1075" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/transparent_bg.xml" value="0.1385" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/drawable/white_bg.xml" value="0.136" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/font/baloo.xml" value="0.6481927710843374" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_admin_home.xml" value="0.136" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_coffee_details.xml" value="0.2" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_forgot_password.xml" value="0.2223731884057971" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_main.xml" value="0.536" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_otpactivity.xml" value="0.176" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_register.xml" value="0.2223731884057971" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_show_order_details.xml" value="0.14901315789473685" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_splash.xml" value="0.22327898550724637" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_user_coffee_details.xml" value="0.152" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/activity_welcome_screen.xml" value="0.2223731884057971" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/card_list_layout.xml" value="0.22327898550724637" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/coffe_list_style.xml" value="0.22327898550724637" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/fragment_admin__add__menu_.xml" value="0.2" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/fragment_admin__home_.xml" value="0.2" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/fragment_admin__settings_.xml" value="0.2" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/fragment_all_coffee_list.xml" value="0.22327898550724637" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/fragment_cart.xml" value="0.152" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/fragment_coffee__edit__popup_.xml" value="0.2" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/fragment_home.xml" value="0.2223731884057971" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/fragment_orders.xml" value="0.16" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/fragment_profile.xml" value="0.152" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/raw_menu_item.xml" value="0.23007246376811594" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/raw_menu_item_edit.xml" value="0.176" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/raw_user_menu_item_.xml" value="0.25" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/row_cart_item.xml" value="0.152" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/row_orders_expandable_item.xml" value="0.15789473684210525" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/row_orders_item.xml" value="0.16799999999999998" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/layout/row_show_orders.xml" value="0.176" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/menu/admin_bottom_nav_menu.xml" value="0.25" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.24479166666666666" />
+        <entry key="..\:/git_projects/CoffeOrderApp/app/src/main/res/menu/search_menu.xml" value="0.25" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
