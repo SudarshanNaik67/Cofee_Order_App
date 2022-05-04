@@ -267,8 +267,7 @@ public class ProfileFragment extends Fragment {
 
                     if (uriTask.isSuccessful()) {
 
-                        if (verifyedMobile.equals(binding.mobileEt.getText().toString())) {
-
+                        if (verifyedMobile.equals(binding.mobileEt.getText().toString())){
                             HashMap<String, Object> hashMap = new HashMap<>();
                             hashMap.put("username", username);
                             hashMap.put("address", address);
@@ -291,7 +290,30 @@ public class ProfileFragment extends Fragment {
                                     Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
+                        }
+                        else {
+                            HashMap<String, Object> hashMap = new HashMap<>();
+                            hashMap.put("username", username);
+                            hashMap.put("address", address);
+                            hashMap.put("mobile", mobile);
+                            hashMap.put("countryCode", countryCode);
+                            hashMap.put("isMobileVerified", "false");
+                            hashMap.put("profile_pic", downloadImageUri.toString());
 
+
+                            databaseReference.child(mAuth.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    progressDialog.dismiss();
+                                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     } else {
                         HashMap<String, Object> hashMap = new HashMap<>();
@@ -514,14 +536,15 @@ public class ProfileFragment extends Fragment {
     }
 
     private String verifyedMobile;
-
     private void LoadVerifyedMobileNumber() {
 
         DatabaseReference databaseReference = database.getReference("Users");
         databaseReference.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                if (snapshot.exists()){
+                    verifyedMobile = ""+snapshot.child("isMobileVerified").getValue();
+                }
             }
 
             @Override
